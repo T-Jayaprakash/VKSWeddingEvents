@@ -2323,3 +2323,48 @@ h2 {
     grid-template-columns: 1fr;
   }
 }
+
+/* ── SEO Keyword Tag Cloud ───────────────────────────────────────────── */
+.seo-tags {
+  padding: 48px 20px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.seo-tags h3 {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.seo-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.seo-tag {
+  display: inline-block;
+  padding: 7px 15px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  transition: color 0.25s, border-color 0.25s, background 0.25s;
+  white-space: nowrap;
+}
+
+.seo-tag:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(183, 110, 121, 0.07);
+}
