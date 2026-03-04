@@ -1924,6 +1924,154 @@ h2 {
   transform: scale(1);
 }
 
+/* ── Hero Supporting Text ───────────────────────────────────────────── */
+.hero-supporting {
+  font-family: var(--font-subheading);
+  font-style: italic;
+  font-size: clamp(0.85rem, 1.4vw, 1rem);
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 560px;
+  margin: 12px auto 6px;
+  line-height: 1.8;
+}
+
+/* ── Garland Section ────────────────────────────────────────────────── */
+.garland-section {
+  background: var(--bg-secondary);
+}
+
+.garland-intro {
+  font-family: var(--font-subheading);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 16px auto 0;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.garland-card-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+  margin-top: 56px;
+}
+
+.garland-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+  transition: transform var(--duration) var(--ease-luxury), box-shadow var(--duration) var(--ease-luxury);
+}
+
+.garland-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.garland-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.garland-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 100px;
+  padding: 5px 14px;
+  background: rgba(183, 110, 121, 0.08);
+}
+
+.garland-img-wrap {
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+.garland-img-wrap img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s var(--ease-luxury);
+}
+
+.garland-card:hover .garland-img-wrap img {
+  transform: scale(1.04);
+}
+
+.garland-caption {
+  margin-top: 16px;
+  font-size: 0.7rem;
+  font-style: italic;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-align: center;
+  font-family: var(--font-subheading);
+}
+
+/* Garland Features */
+.garland-features {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.garland-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.garland-feature-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.garland-feature-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(183, 110, 121, 0.1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.garland-features h4 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+
+.garland-features p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
 /* ── Responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .pricing-grid {
@@ -1961,6 +2109,11 @@ h2 {
   .hero-buttons {
     flex-direction: column;
     align-items: center;
+  }
+
+  .garland-card-wrap {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
   .project-block,
