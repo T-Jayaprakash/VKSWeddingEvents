@@ -126,23 +126,70 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Contact Form → WhatsApp ──
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
+    const formError = document.getElementById('formError');
+
+    function showError(msg) {
+      if (!formError) return;
+      formError.textContent = msg;
+      formError.style.display = 'block';
+      formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function hideError() {
+      if (formError) formError.style.display = 'none';
+    }
+
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const fd = new FormData(contactForm);
-      const name = fd.get('name') || '';
-      const phone = fd.get('phone') || '';
-      const eventDate = fd.get('eventDate') || '';
-      const budget = fd.get('budget') || '';
-      const message = fd.get('message') || '';
+      hideError();
 
-      const text = `Hello VKS Design Studio,%0A%0A` +
-        `Name: ${encodeURIComponent(name)}%0A` +
-        `Phone: ${encodeURIComponent(phone)}%0A` +
-        `Event Date: ${encodeURIComponent(eventDate)}%0A` +
-        `Budget: ${encodeURIComponent(budget)}%0A` +
-        `Message: ${encodeURIComponent(message)}`;
+      const name = contactForm.querySelector('[name="name"]')?.value.trim() || '';
+      const phone = contactForm.querySelector('[name="phone"]')?.value.trim() || '';
+      const date = contactForm.querySelector('[name="eventDate"]')?.value.trim() || '';
+      const venue = contactForm.querySelector('[name="venue"]')?.value.trim() || '';
+      const service = contactForm.querySelector('[name="service"]')?.value.trim() || '';
+      const budget = contactForm.querySelector('[name="budget"]')?.value.trim() || '';
+      const note = contactForm.querySelector('[name="message"]')?.value.trim() || '';
 
-      window.open(`https://wa.me/919789567567?text=${text}`, '_blank');
+      // Validation
+      if (!name) return showError('Please enter your full name.');
+      if (!phone) return showError('Please enter your phone number.');
+      if (!date) return showError('Please select your event date.');
+      if (!venue) return showError('Please enter your venue name.');
+      if (!service) return showError('Please select a service.');
+
+      // Format date nicely
+      let displayDate = date;
+      try {
+        displayDate = new Date(date).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+      } catch (_) { }
+
+      const message =
+        `Hello VKS Garland and Decorations,
+
+I would like to enquire about your wedding decoration services.
+
+--- Customer Details ---
+Name  : ${name}
+Phone : ${phone}
+
+--- Event Details ---
+Event Date : ${displayDate}
+Venue      : ${venue}
+
+--- Service Requested ---
+Service      : ${service}
+Budget Range : ${budget || 'Not specified'}
+
+--- Additional Message ---
+${note || 'No additional message provided.'}
+
+Please let me know about your availability and pricing.
+
+Thank you.`;
+
+      const encoded = encodeURIComponent(message);
+      window.open(`https://wa.me/919789567567?text=${encoded}`, '_blank');
     });
   }
 
