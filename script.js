@@ -69,8 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── Gallery Lightbox ──
-  const galleryItems = document.querySelectorAll('.gallery-item');
+  // ── Gallery Lightbox (supports .masonry-item and .gallery-item) ──
+  const galleryItems = document.querySelectorAll('.masonry-item, .gallery-item');
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxClose = document.getElementById('lightboxClose');
