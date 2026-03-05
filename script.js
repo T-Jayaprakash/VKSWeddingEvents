@@ -189,7 +189,7 @@ Please let me know about your availability and pricing.
 Thank you.`;
 
       const encoded = encodeURIComponent(message);
-      window.open(`https://wa.me/919789567567?text=${encoded}`, '_blank');
+      window.open(`https://wa.me/919994012325?text=${encoded}`, '_blank');
     });
   }
 
