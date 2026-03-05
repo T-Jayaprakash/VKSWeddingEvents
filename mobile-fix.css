@@ -48,37 +48,33 @@ img {
         margin-bottom: 16px !important;
     }
 
-    /* The cloud container MUST be row flex — not column */
+    /* The cloud container: CSS grid forces 3-per-row always */
     .seo-tag-cloud,
     .tag-container {
-        display: flex !important;
-        flex-direction: row !important;
-        /* KEY: override any column direction */
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 10px !important;
-        padding: 0 4px !important;
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+        padding: 0 !important;
         max-width: 100% !important;
         margin: 0 auto !important;
     }
 
-    /* Each tag pill must NOT expand to full width */
+    /* Each tag pill fills its grid cell and wraps text */
     .seo-tag {
-        display: inline-flex !important;
+        display: flex !important;
         align-items: center !important;
-        width: auto !important;
-        /* KEY: override any width:100% */
-        min-width: unset !important;
-        /* KEY: override min-width:0 */
-        max-width: none !important;
-        flex: 0 0 auto !important;
-        /* do not grow or shrink */
-        white-space: nowrap !important;
-        padding: 7px 13px !important;
-        border-radius: 999px !important;
-        font-size: 0.76rem !important;
+        justify-content: center !important;
         text-align: center !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: unset !important;
+        min-width: unset !important;
+        padding: 6px 8px !important;
+        border-radius: 999px !important;
+        font-size: 0.65rem !important;
+        line-height: 1.3 !important;
     }
 
     /* ── ISSUE 2: Footer — 2-column layout matching desktop ─────────────── */
@@ -327,13 +323,15 @@ img {
         gap: 8px !important;
     }
 
-    .seo-tags {
-        padding: 24px 10px !important;
+    .seo-tag-cloud,
+    .tag-container {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 6px !important;
     }
 
     .seo-tag {
-        font-size: 0.72rem !important;
-        padding: 6px 11px !important;
+        font-size: 0.6rem !important;
+        padding: 5px 6px !important;
     }
 
     .whatsapp-float {
