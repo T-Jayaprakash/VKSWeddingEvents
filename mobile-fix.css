@@ -1,6 +1,6 @@
 /* ==========================================================================
-   VKS Garland and Decorations — mobile-fix.css (v2)
-   Targeted fixes for 5 confirmed mobile issues.
+   VKS Garland and Decorations — mobile-fix.css (v3)
+   Mobile-first 2-column split layout for all sections.
    Loaded LAST — overrides everything above it.
    ========================================================================== */
 
@@ -28,13 +28,7 @@ img {
    ══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
 
-    /* ── ISSUE 1: SEO keyword tag cloud — fix 1-per-row stacking ────────
-     Root causes:
-       • Any flex-direction: column on .seo-tags or its container
-       • .seo-tag being block / width:100%
-       • min-width: 0 from broad selectors making tags collapse
-     Fix: force row-wrap layout on both the cloud container AND each tag
-  ─────────────────────────────────────────────────────────────────────── */
+    /* ── ISSUE 1: SEO keyword tag cloud — fix 1-per-row stacking ──────── */
     .seo-tags {
         padding: 32px 16px !important;
     }
@@ -48,7 +42,6 @@ img {
         margin-bottom: 16px !important;
     }
 
-    /* The cloud container: CSS grid forces 3-per-row always */
     .seo-tag-cloud,
     .tag-container {
         display: grid !important;
@@ -59,7 +52,6 @@ img {
         margin: 0 auto !important;
     }
 
-    /* Each tag pill fills its grid cell and wraps text */
     .seo-tag {
         display: flex !important;
         align-items: center !important;
@@ -77,19 +69,16 @@ img {
         line-height: 1.3 !important;
     }
 
-    /* ── ISSUE 2: Footer — 2-column layout matching desktop ─────────────── */
+    /* ── ISSUE 2: Footer — 2-col layout ─────────────────────────────── */
     .footer-grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
-        /* 2 cols like desktop */
         gap: 28px 20px !important;
         align-items: start !important;
     }
 
-    /* Brand section spans both columns at the top */
     .footer-brand {
         grid-column: 1 / -1 !important;
-        /* full width */
         text-align: left !important;
         margin-bottom: 4px !important;
     }
@@ -100,7 +89,6 @@ img {
         max-width: 100% !important;
     }
 
-    /* Each column: left-aligned, compact */
     .footer-col {
         text-align: left !important;
         margin-bottom: 0 !important;
@@ -112,7 +100,6 @@ img {
         margin-bottom: 10px !important;
     }
 
-    /* Footer links: tight stacking */
     .footer-col a {
         display: block !important;
         padding: 3px 0 !important;
@@ -120,7 +107,6 @@ img {
         line-height: 1.7 !important;
     }
 
-    /* Social icons row — left aligned under brand */
     .footer-social {
         display: flex !important;
         flex-direction: row !important;
@@ -139,13 +125,12 @@ img {
         padding: 16px !important;
     }
 
-    /* ── ISSUE 3: Section spacing — less vertical padding ───────────────── */
+    /* ── ISSUE 3: Section spacing ─────────────────────────────────────── */
     .section,
     section {
-        padding: 40px 16px !important;
+        padding: 36px 16px !important;
     }
 
-    /* All container padding tightened */
     .container {
         padding-left: 16px !important;
         padding-right: 16px !important;
@@ -153,7 +138,7 @@ img {
         max-width: 100% !important;
     }
 
-    /* ── ISSUE 4: Floating buttons — no overlap ──────────────────────────── */
+    /* ── ISSUE 4: Floating buttons ────────────────────────────────────── */
     .whatsapp-float {
         position: fixed !important;
         bottom: 80px !important;
@@ -172,7 +157,7 @@ img {
         height: 40px !important;
     }
 
-    /* ── ISSUE 5: Navbar ─────────────────────────────────────────────────── */
+    /* ── ISSUE 5: Navbar ──────────────────────────────────────────────── */
     .navbar .container,
     #navbar .container {
         display: flex !important;
@@ -192,7 +177,6 @@ img {
         white-space: nowrap !important;
     }
 
-    /* Shrink the brand text on mobile */
     .nav-logo span,
     .nav-logo h1,
     .nav-logo .logo-text {
@@ -211,19 +195,451 @@ img {
         display: none !important;
     }
 
-    /* ── GENERAL: other grids collapse properly ──────────────────────────── */
-    .services-grid,
-    .pricing-grid,
-    .process-grid,
-    .contact-grid,
-    .blog-grid,
-    .garland-features,
+    /* ══════════════════════════════════════════════════════════════════
+       SITE-WIDE 2-COLUMN SPLIT LAYOUT
+       Text on left, Image on right. Magazine-style mobile layout.
+    ══════════════════════════════════════════════════════════════════ */
+
+    /* ── PROJECT BLOCKS (Signature Services section) ──────────────────
+       Already a 2-col grid on desktop. Keep as 2-col on mobile but
+       tighten spacing and reduce font sizes.
+    ─────────────────────────────────────────────────────────────────── */
+    .project-block,
+    .project-block.reversed {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+        padding: 20px 0 !important;
+    }
+
+    /* Normal block: text left, image right */
+    .project-block .project-image {
+        order: 2 !important;
+    }
+
+    .project-block .project-text {
+        order: 1 !important;
+    }
+
+    /* Reversed block: image left, text right */
+    .project-block.reversed .project-image {
+        order: 1 !important;
+    }
+
+    .project-block.reversed .project-text {
+        order: 2 !important;
+    }
+
+    .project-image img {
+        aspect-ratio: 3/4 !important;
+        border-radius: 10px !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .project-text {
+        padding: 8px 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+
+    .project-location {
+        font-size: 0.55rem !important;
+        letter-spacing: 0.1em !important;
+        margin-bottom: 6px !important;
+    }
+
+    .project-text h3 {
+        font-size: 0.95rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 8px !important;
+    }
+
+    .project-text p {
+        font-size: 0.75rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 10px !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 3 !important;
+        line-clamp: 3 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    .project-link {
+        font-size: 0.6rem !important;
+        letter-spacing: 0.12em !important;
+    }
+
+    .project-link svg {
+        width: 12px !important;
+        height: 12px !important;
+    }
+
+    /* ── ABOUT GRID (image + about text, 2-col) ───────────────────────── */
+    .about-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+        align-items: center !important;
+    }
+
+    .about-image img {
+        aspect-ratio: 3/4 !important;
+        border-radius: 10px !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .about-text h2 {
+        font-size: 1rem !important;
+        margin-bottom: 6px !important;
+    }
+
+    .about-text p {
+        font-size: 0.75rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 8px !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 4 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    .stats-row {
+        gap: 16px !important;
+        margin-top: 12px !important;
+        padding-top: 12px !important;
+    }
+
+    .stat-number {
+        font-size: 1.2rem !important;
+    }
+
+    .stat-label {
+        font-size: 0.6rem !important;
+    }
+
+    /* ── GARLAND CARD WRAP (image left + feature list right, 2-col) ─────── */
     .garland-card-wrap {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+        align-items: start !important;
+    }
+
+    /* Strip the card box on mobile — just show image cleanly */
+    .garland-card {
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        width: 100% !important;
+    }
+
+    .garland-img-wrap img {
+        aspect-ratio: 2/3 !important;
+        border-radius: 10px !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+
+    /* Badges: tiny pills in one row above image */
+    .garland-badges {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        margin-bottom: 6px !important;
+    }
+
+    .garland-badge {
+        font-size: 0.5rem !important;
+        letter-spacing: 0.06em !important;
+        padding: 3px 6px !important;
+        border-radius: 999px !important;
+        white-space: nowrap !important;
+    }
+
+    /* Hide long caption on mobile to reduce clutter */
+    .garland-caption {
+        display: none !important;
+    }
+
+    /* Feature list: compact icon + text rows */
+    .garland-features {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding-top: 4px !important;
+    }
+
+    .garland-feature-item {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        padding: 0 !important;
+        border: none !important;
+        background: none !important;
+    }
+
+    .garland-feature-icon {
+        flex-shrink: 0 !important;
+        width: 16px !important;
+        height: 16px !important;
+        margin-top: 2px !important;
+    }
+
+    .garland-feature-icon svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    .garland-feature-content h4 {
+        font-size: 0.72rem !important;
+        margin-bottom: 2px !important;
+        line-height: 1.3 !important;
+    }
+
+    .garland-feature-content p {
+        font-size: 0.65rem !important;
+        line-height: 1.45 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    /* ── SERVICES GRID (2 cards per row) ──────────────────────────────── */
+    .services-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+    }
+
+    .service-card {
+        border-radius: 10px !important;
+    }
+
+    .service-card-image {
+        aspect-ratio: 4/3 !important;
+        overflow: hidden !important;
+    }
+
+    .service-card-image img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .service-card-body {
+        padding: 10px !important;
+    }
+
+    .service-card-body h3 {
+        font-size: 0.82rem !important;
+        margin-bottom: 4px !important;
+    }
+
+    .service-card-body p {
+        font-size: 0.7rem !important;
+        line-height: 1.5 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    /* ── FEATURED GRID (portfolio cards, 2-col) ──────────────────────── */
+    .featured-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+    }
+
+    .featured-card img {
+        aspect-ratio: 3/4 !important;
+        width: 100% !important;
+        object-fit: cover !important;
+        border-radius: 10px !important;
+    }
+
+    /* ── DETAIL GRID (service detail pages) ─────────────────────────── */
+    .detail-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+        align-items: start !important;
+    }
+
+    .detail-image img {
+        aspect-ratio: 3/4 !important;
+        width: 100% !important;
+        object-fit: cover !important;
+        border-radius: 10px !important;
+    }
+
+    .detail-text h2 {
+        font-size: 1rem !important;
+        margin-bottom: 6px !important;
+    }
+
+    .detail-text p {
+        font-size: 0.75rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 8px !important;
+    }
+
+    .detail-gallery {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+
+    /* ── GALLERY GRID (2-col on mobile) ──────────────────────────────── */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+
+    /* ── PRICING GRID (1-col on mobile, cards don't split well) ─────── */
+    .pricing-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* ── PROCESS GRID (2-col on mobile) ──────────────────────────────── */
+    .process-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 16px 12px !important;
+    }
+
+    .process-grid::before {
+        display: none !important;
+    }
+
+    .process-number {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 1.1rem !important;
+        line-height: 34px !important;
+    }
+
+    .process-step h3 {
+        font-size: 0.82rem !important;
+        margin-bottom: 4px !important;
+    }
+
+    .process-step p {
+        font-size: 0.7rem !important;
+        line-height: 1.5 !important;
+    }
+
+    /* ── BLOG GRID (2-col) ────────────────────────────────────────────── */
+    .blog-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+    }
+
+    .blog-card-body {
+        padding: 12px !important;
+    }
+
+    .blog-card-body h3 {
+        font-size: 0.82rem !important;
+    }
+
+    .blog-card-body p {
+        font-size: 0.7rem !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    /* ── CONTACT PAGE: info + map side by side ─────────────────────────── */
+    .contact-grid {
         grid-template-columns: 1fr !important;
         gap: 20px !important;
     }
 
-    /* Grid children — prevent overflow but not on inline-flex tags */
+    .contact-info-map-wrap {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+        align-items: stretch !important;
+    }
+
+    /* Contact info blocks: icon + text div side by side, compact */
+    .contact-info-details {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+    }
+
+    .contact-info-block {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        margin-bottom: 10px !important;
+        padding-bottom: 10px !important;
+    }
+
+    .contact-info-details .contact-info-block:last-child {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+        border-bottom: none !important;
+    }
+
+    .contact-info-icon {
+        flex-shrink: 0 !important;
+        width: 16px !important;
+        height: 16px !important;
+        margin-top: 2px !important;
+    }
+
+    .contact-info-icon svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    /* The text div wraps h4 label + p value together cleanly */
+    .contact-info-text {
+        min-width: 0 !important;
+        flex: 1 !important;
+    }
+
+    .contact-info-block h4 {
+        font-size: 0.55rem !important;
+        letter-spacing: 0.08em !important;
+        margin-bottom: 2px !important;
+        white-space: nowrap !important;
+    }
+
+    .contact-info-block p {
+        font-size: 0.68rem !important;
+        line-height: 1.4 !important;
+        word-break: break-word !important;
+    }
+
+    .contact-map-block {
+        display: flex !important;
+        flex-direction: column !important;
+        min-height: 240px !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+    }
+
+    .contact-map-block iframe {
+        flex: 1 !important;
+        min-height: 200px !important;
+        width: 100% !important;
+        border: 0 !important;
+    }
+
+    /* ── Grid children — prevent overflow ────────────────────────────── */
     [class*="grid"]>*:not(.seo-tag),
     .garland-card-wrap>*,
     .services-grid>*,
@@ -231,7 +647,7 @@ img {
         min-width: 0 !important;
     }
 
-    /* ── Hero buttons stack ──────────────────────────────────────────────── */
+    /* ── Hero buttons stack ───────────────────────────────────────────── */
     .hero-buttons,
     .cta-buttons {
         flex-direction: column !important;
@@ -248,7 +664,7 @@ img {
         text-align: center !important;
     }
 
-    /* ── Typography ─────────────────────────────────────────────────────── */
+    /* ── Typography ───────────────────────────────────────────────────── */
     h1,
     h2,
     h3,
@@ -266,10 +682,10 @@ img {
     }
 
     .section-header h2 {
-        font-size: clamp(1.35rem, 6vw, 1.9rem) !important;
+        font-size: clamp(1.2rem, 5vw, 1.7rem) !important;
     }
 
-    /* ── Gallery: 2-col natural height ──────────────────────────────────── */
+    /* ── Gallery masonry: 2-col natural height ────────────────────────── */
     .masonry-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         grid-auto-rows: auto !important;
@@ -293,7 +709,7 @@ img {
         object-fit: cover !important;
     }
 
-    /* ── iOS: prevent zoom on form field focus ───────────────────────────── */
+    /* ── iOS: prevent zoom on form field focus ───────────────────────── */
     .form-group input,
     .form-group select,
     .form-group textarea,
@@ -315,7 +731,7 @@ img {
     }
 
     .section-header h2 {
-        font-size: clamp(1.2rem, 7vw, 1.5rem) !important;
+        font-size: clamp(1.1rem, 6.5vw, 1.4rem) !important;
     }
 
     .masonry-grid {

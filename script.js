@@ -69,8 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── Gallery Lightbox (supports .masonry-item and .gallery-item) ──
-  const galleryItems = document.querySelectorAll('.masonry-item, .gallery-item');
+  // ── Gallery Lightbox (supports .masonry-item, .gallery-item, .work-item) ──
+  const galleryItems = document.querySelectorAll('.masonry-item, .gallery-item, .work-item');
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxClose = document.getElementById('lightboxClose');
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function buildImageList() {
     images = [];
-    document.querySelectorAll('.masonry-item:not(.hidden), .gallery-item').forEach(item => {
+    document.querySelectorAll('.masonry-item:not(.hidden), .gallery-item, .work-item').forEach(item => {
       const img = item.querySelector('img');
       if (img) images.push({ src: img.src, alt: img.alt });
     });
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (lightbox) {
     buildImageList();
 
-    document.querySelectorAll('.masonry-item, .gallery-item').forEach((item, i) => {
+    document.querySelectorAll('.masonry-item, .gallery-item, .work-item').forEach((item, i) => {
       item.addEventListener('click', () => {
         buildImageList();
         // Find index of this item's image in the current image list
